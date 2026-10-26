@@ -1,0 +1,136 @@
+---
+title: "Práctica 2. Visualización de datos"
+author: "Marcos Ruiz Baidez"
+date: "`r Sys.Date()`"
+output:
+  bookdown::pdf_document2:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    figure_caption: "Figura" # Referencias en castellano
+    table_caption: "Tabla"
+  html_document:
+    echo: true
+    number_sections: true
+    theme: lumen
+    toc: true
+  html_notebook:
+    echo: true
+    number_sections: true
+    toc: true
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+  bookdown::html_document2:
+    echo: true
+    number_sections: true
+    theme: spacelab
+    toc: true
+    figure_caption: "Figura"
+    table_caption: "Tabla"
+always_allow_html: true
+params:
+  lang: ES
+lang: "`r switch(params$lang, ES = 'es-ES', EN = 'en-US')`"
+subtitle: "Análisis Exploratorio de Datos. Máster en Ciencia de Datos- UV"
+language:
+  label:
+    fig: 'Figura '
+    tab: 'Tabla '
+    eq: 'Ecuación '
+    thm: 'Teorema '
+    lem: 'Lema '
+    def: 'Definición '
+    cor: 'Corolario '
+    prp: 'Proposición '
+    exm: 'Ejemplo '
+    exr: 'Ejercicio '
+    proof: 'Demostración. '
+    remark: 'Nota: '
+    solution: 'Solución. '
+---
+
+```{r setup, cache = F, echo = F, message = F, warning = F, tidy = F}
+
+
+# CONFIGURACIÓN GENERAL
+library(knitr)
+options(width = 100)
+
+# Opciones generales de los chucks. Se utilizarán salvo cambios en el chunk
+opts_chunk$set(echo=T,
+               message = F, 
+               error = F, 
+               warning = F, 
+               comment = NA, 
+               fig.align = 'center', 
+               dpi = 200, 
+               tidy = F, 
+               cache.path = '.cache/', 
+               fig.path = './figura/')
+
+# Opciones generales de dígitos cuando se incluyen tablas
+#options(xtable.type = 'html')
+knit_hooks$set(inline = function(x) {
+  
+  if(is.numeric(x)) {
+    round(x, getOption('digits'))
+  } else {
+    paste(as.character(x), collapse = ', ')
+  }
+})
+#knit_hooks$set(plot = knitr:::hook_plot_html)
+```
+
+Cargamos los paquetes que usaremos en la práctica:
+
+```{r, echo=FALSE}
+library(tidyverse)
+```
+
+
+# Ejercicio 1
+
+Cargamos el fichero pedido
+
+```{r}
+load("data/weatherAUS.RData")
+```
+
+Creamos el objeto ggplot `grafico1`:
+
+```{r}
+grafico1 <- ggplot(data=ds, aes(x = MinTemp, y = MaxTemp))
+```
+
+Añadimos la capa para construir el gráfico de dispersión de las variables:
+
+```{r}
+grafico1 <- grafico1 + geom_point()
+grafico1
+```
+
+Generamos el mismo gráfico en `grafico2`, pero usamos la variable categórica `RainTomorrow` para determinar el color
+
+```{r}
+grafico2 <- ggplot(data=ds, aes(x = MinTemp, y = MaxTemp, colour=RainTomorrow))
+grafico2 <- grafico2 + geom_point()
+grafico2
+```
+
+Lo almacenamos en `grafico3` añadiendo un título:
+
+```{r}
+grafico3 <- grafico2 + ggtitle("Gráfico de dispersión temperatura mínima
+                               (MinTemp) frente a temperatura máxima (MaxTemp)")
+grafico3
+```
+
+Lo almacenamos en la carpeta `results`:
+
+```{r}
+ggsave("./results/Ejercicio1.pdf")
+```
+
+
