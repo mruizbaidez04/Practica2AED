@@ -236,5 +236,51 @@ Almacenamiento en formato pdf:
 ggsave("./results/Ejercicio3.pdf")
 ```
 
+# Ejercicio 4
+
+Primer apartado:
+
+```{r}
+load("./data/Ejercicio4_Data.Rdata")
+```
+
+Segundo apartado:
+
+```{r}
+ggplot(data=DatosEjer4, aes(x = Fecha, y = Ventas, color=Fabricante)) +
+  geom_point()
+```
+
+Este gráfico no permite evaluar correctamente la evolución de las ventas de cada fabricante.
+
+Tercer apartado:
+
+```{r}
+ggplot(data=DatosEjer4, aes(x = Fecha, y = Ventas, color=Fabricante)) +
+  geom_point() + geom_line()
+```
+
+Añadiendo las líneas, podemos visualizar mejor la evolución de las ventas.
+
+Cuarto apartado:
+
+```{r}
+ggplot(data=DatosEjer4, aes(x = Fecha, y = Ventas, color=Fabricante)) +
+  geom_point() + geom_line(aes(linetype = Fabricante))
+```
+
+Quinto apartado:
+
+```{r}
+ggplot(data=DatosEjer4, aes(x = Fecha, y = Ventas, color=Fabricante)) +
+  geom_point() + geom_line(aes(linetype = Fabricante)) +
+  ggtitle("Ventas mensuales de diferentes compañías tecnológicas")
+```
+
+Almacenamos en formato pdf:
+
+```{r}
+ggsave("./results/Ejercicio4.pdf")
+```
 
 
