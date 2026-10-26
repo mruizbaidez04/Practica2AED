@@ -175,5 +175,66 @@ Quinto apartado
 ggsave("./results/Ejercicio2.pdf")
 ```
 
+# Ejercicio 3
+
+Primer apartado:
+
+```{r}
+load("./data/iris_tidy.Rdata")
+```
+
+Segundo apartado:
+
+```{r}
+str(iris.tidy)
+```
+
+Tercer apartado:
+
+```{r}
+iris_grafico1 <- ggplot(data=iris.tidy, aes(x = Species, y = Value))
+```
+
+Cuarto apartado:
+
+```{r}
+iris_grafico1 <- iris_grafico1 + geom_point()
+iris_grafico1
+```
+
+Quinto apartado:
+
+```{r}
+iris_grafico2 <- iris_grafico1 + aes(colour=Part)
+iris_grafico2
+```
+
+Sexto apartado:
+
+```{r}
+iris_grafico2 + facet_grid(Measure~.)
+```
+
+```{r}
+iris_grafico2 + facet_grid(.~Measure)
+```
+
+La disposición por columnas permite comparar mejor los valores de las dos variables.
+
+Séptimo apartado:
+
+```{r}
+ggplot(data=iris.tidy, aes(x = Species, y = Value, colour=Part)) + 
+  geom_jitter() + facet_grid(.~Measure)
+```
+
+Añade un error normal a los puntos para que no se vean todos acumulados y poder distinguir la proporción de valores en cada punto.
+
+Almacenamiento en formato pdf:
+
+```{r}
+ggsave("./results/Ejercicio3.pdf")
+```
+
 
 
