@@ -398,5 +398,90 @@ Guardar el gráfico:
 ggsave("./results/Ejercicio7.pdf")
 ```
 
+# Ejercicio 8
+
+Descargamos los datos:
+
+```{r}
+URL <- "http://assets.datacamp.com/blog_assets/chol.txt"
+download.file(url = URL, destfile="./data/chol.txt")
+```
+
+Los almacenamos en un data frame:
+
+```{r}
+chol_df <- read.csv("./data/chol.txt", sep=" ", 
+                    header=TRUE, stringsAsFactors = TRUE)
+```
+
+Segundo apartado:
+
+```{r}
+ggplot(data=chol_df, aes(x = HEIGHT)) + geom_histogram()
+```
+
+Tercer apartado:
+
+```{r}
+ggplot(data=chol_df, aes(x = HEIGHT)) + geom_histogram() +
+  labs(title="Histograma de la variable Altura",
+       x = "Altura (cm)", y = "Frecuencia")
+```
+
+Cuarto apartado:
+
+```{r}
+ggplot(data=chol_df, aes(x = HEIGHT)) + 
+  geom_histogram(breaks=seq(155, 195, length.out=21)) +
+  labs(title="Histograma de la variable Altura",
+       x = "Altura (cm)", y = "Frecuencia")
+```
+
+Quinto apartado:
+
+```{r}
+ggplot(data=chol_df, aes(x = HEIGHT)) + 
+  geom_histogram(breaks=seq(155, 195, length.out=21), 
+                 fill="#619CFF",
+                 alpha=0.5, 
+                 color="#F8766D") +
+  labs(title="Histograma de la variable Altura",
+       x = "Altura (cm)", y = "Frecuencia")
+```
+
+Sexto apartado:
+
+```{r}
+ggplot(data=chol_df, aes(x = HEIGHT)) + 
+  geom_histogram(aes(y =after_stat(density)),
+                 breaks=seq(155, 195, length.out=21), 
+                 fill="#619CFF",
+                 alpha=0.5, 
+                 color="#F8766D") +
+  geom_density(color="#00BA38") +
+  labs(title="Histograma de la variable Altura",
+       x = "Altura (cm)", y = "Frecuencia")
+```
+
+Séptimo apartado:
+
+```{r}
+ggplot(data=chol_df, aes(x = HEIGHT)) + 
+  geom_histogram(aes(y =after_stat(density)),
+                 breaks=seq(155, 195, length.out=21), 
+                 fill="#619CFF",
+                 alpha=0.5, 
+                 color="#F8766D") +
+  geom_density(color="#00BA38") +
+  labs(title="Histograma de la variable Altura",
+       x = "Altura (cm)", y = "Frecuencia") +
+  facet_grid(.~MORT)
+```
+
+Guardamos el gráfico
+
+```{r}
+ggsave("./results/Ejercicio8.pdf")
+```
 
 
