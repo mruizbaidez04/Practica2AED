@@ -133,4 +133,47 @@ Lo almacenamos en la carpeta `results`:
 ggsave("./results/Ejercicio1.pdf")
 ```
 
+# Ejercicio 2
+
+Primer apartado:
+
+```{r}
+ggplot(data=ds) + geom_point(mapping = aes(x = Temp9am, y = Pressure9am))
+```
+
+Segundo apartado
+
+```{r}
+ggplot(data=ds) + 
+  geom_point(mapping = aes(x = Temp9am, y = Pressure9am, shape=RainToday))
+```
+
+Tercer apartado:
+
+```{r}
+ggplot(data=ds) + 
+  geom_point(mapping = aes(x = Temp9am, y = Pressure9am, colour=RainToday))
+```
+
+Observamos que se observa mejor la información de `RainToday` si modificamos el color y no la forma.
+
+Cuarto apartado:
+
+```{r}
+ggplot(data=ds) + 
+  geom_point(mapping = aes(x = Temp9am, y = Pressure9am, colour=RainToday))+
+  labs(title="Datos climatológicos de Australia",
+       subtitle="Relación entre la temperatura y la presión a las 9 de la mañana",
+       x = "Temperatura",
+       y = "Presión atmosférica",
+       colour="Lluvia hoy")
+```
+
+Quinto apartado
+
+```{r}
+ggsave("./results/Ejercicio2.pdf")
+```
+
+
 
