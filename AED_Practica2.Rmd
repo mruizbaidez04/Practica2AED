@@ -325,3 +325,40 @@ Guardar la imagen
 ggsave("./results/Ejercicio5.pdf")
 ```
 
+# Ejercicio 6
+
+Cargar los datos:
+
+```{r}
+load("./data/iceRiver.RData")
+```
+
+Primer apartado:
+
+```{r}
+ggplot(data=ice.river.df) +
+  geom_line(aes(x = time, y = flow.vat), color="#F8766D") +
+  geom_line(aes(x = time, y = flow.jok), color='#00BFC4')
+```
+
+Observamos que el río `jok` tiene mayor caudal que el río `vat`.
+
+Segundo apartado:
+
+```{r}
+ggplot(data=ice.river.df) +
+  geom_line(aes(x = time, y = flow.vat), color="#F8766D") +
+  geom_line(aes(x = time, y = flow.jok), color='#00BFC4') +
+  labs(title="Evolución temporal del caudal de dos ríos",
+       x = "Evolución temporal",
+       y = " Caudal")
+```
+
+Almacenamos el gráfico:
+
+```{r}
+ggsave("./results/Ejercicio6.pdf")
+```
+
+
+
